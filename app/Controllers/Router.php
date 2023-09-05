@@ -2,6 +2,7 @@
 
 namespace app\Controllers;
 use app\Http\Request;
+use app\Middleware\Middleware;
 
 class Router
 {
@@ -60,6 +61,12 @@ class Router
     public function prefix($prefix)
     {
         return new RouteGroup($this, $prefix);
+    }
+
+
+    public function middleware($middlewareKey)
+    {
+        return new Middleware($this, $middlewareKey);
     }
 
 }
