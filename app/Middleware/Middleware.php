@@ -9,6 +9,9 @@ class Middleware
     protected $middlewares = [];
     private $middleware = '';
 
+    /**
+     * @param $middleware
+     */
     public function __construct($middleware)
     {
         $this->middleware = $this->middlewares[$middleware];
