@@ -1,0 +1,15 @@
+{
+    "name": "ripen/legacy",
+    "description": "test legacy project",
+    "autoload": {
+        "psr-4": {
+            "app\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "JUN"
+        }
+    ],
+    "require": {}
+}
