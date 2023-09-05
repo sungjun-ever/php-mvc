@@ -12,7 +12,7 @@ class Router
      * @param $method String : http method
      * @param $url String : request url
      * @param $handler : controller
-     * @return void
+     * @return Router
      */
     public function addRoute($method, $url, $handler)
     {
@@ -21,6 +21,7 @@ class Router
         }
 
         $this->routes[$method][$url] = $handler;
+        return new self;
     }
 
 
