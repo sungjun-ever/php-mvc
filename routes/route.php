@@ -10,7 +10,7 @@ $router = new Router();
 $router->addRoute('GET', '/', function () {
     $controller = new HomeController();
     $controller->index();
-});
+})->middleware('admin');
 
 $router->prefix('/users')->group(function ($router){
     $router->addRoute('GET', '/', function () {
