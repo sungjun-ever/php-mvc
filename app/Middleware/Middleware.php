@@ -9,7 +9,10 @@ class Middleware
     private $router = '';
     // 사용할 미들웨어 클래스 등록
     // key => class
-    protected $middlewares = [];
+    protected $middlewares = [
+        'admin' => IsAdmin::class
+    ];
+
     private $middleware = '';
 
 
@@ -21,5 +24,14 @@ class Middleware
     {
         $this->router = $router;
         $this->middleware = $this->middlewares[$middleware];
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getMiddleware()
+    {
+        print_r($this->middleware);
+        return $this->middleware;
     }
 }
