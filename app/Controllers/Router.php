@@ -35,18 +35,24 @@ class Router
         $params = [];
 
         foreach ($this->routes[$method] as $route => $handler) {
-            $pattern = preg_replace('/{([^}]+)}/', '([^/]+)', $route);
+            $pattern = preg_replace_callback('/{([^}]+)}/', function ($matches) use (&$params) {
+                $paramName = $matches[1];
+                $params[$paramName] = null; // 기본값 설정 (null 또는 다른 기본값으로 변경 가능)
+                return '([^/]+)'; // 동적 매개변수에 대한 정규식
+            }, $route);
             $pattern = str_replace('/', '\/', $pattern);
             $pattern = '/^' . $pattern . '$/';
 
             if (preg_match($pattern, $url, $matches)) {
                 foreach ($matches as $key => $value) {
                     if ($key !== 0) {
-                        $params[$key] = $value;
+                        $paramName = array_keys($params)[$key - 1];
+                        $params[$paramName] = $value;
                     }
                 }
+
                 $request = new Request();
-//                $request->merge($params);
+                $request->setUrlParam($params);
 
                 $handler($request);
                 return;
