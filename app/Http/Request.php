@@ -2,31 +2,65 @@
 
 namespace app\Http;
 
-class Request
+class Request2
 {
-    private $data = [];
+    private $url;
+    private $method;
+    private $headers;
+    private $body;
 
-    /**
-     * @param array $data
-     */
     public function __construct()
     {
-        $this->data = $_REQUEST;
+        $this->url = $_SERVER['REQUEST_URI'];
+        $this->method = $_SERVER['REQUEST_METHOD'];
+        $this->headers = getallheaders();
+        $this->body = file_get_contents('php://input');
     }
 
-    public function input($key, $default = null)
+    /**
+     * @return mixed
+     */
+    public function getUrl()
     {
-        return $this->data[$key] ?: $default;
+        return $this->url;
     }
 
-    public function merge($data)
+    /**
+     * @return mixed
+     */
+    public function getMethod()
     {
-        $this->data = array_merge($this->data, $data);
+        return $this->method;
     }
 
+    /**
+     * @return array|false
+     */
+    public function getHeaders()
+    {
+        return $this->headers;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
+     * 모든 request 정보
+     * @return array
+     */
     public function all()
     {
-        return $this->data;
+        return [
+            $this->getUrl(),
+            $this->getMethod(),
+            $this->getHeaders(),
+            $this->getBody()
+        ];
     }
 
 
