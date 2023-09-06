@@ -97,7 +97,4 @@ class Request
             'body' => $this->getBody()
         ];
     }
-
-
-
 }
