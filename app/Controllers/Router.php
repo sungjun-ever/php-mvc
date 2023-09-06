@@ -1,8 +1,8 @@
 <?php
 
 namespace app\Controllers;
+use app\Http\PrevRequestVer;
 use app\Http\Request;
-use app\Middleware\Middleware;
 
 class Router
 {
@@ -46,7 +46,7 @@ class Router
                     }
                 }
                 $request = new Request();
-                $request->merge($params);
+//                $request->merge($params);
 
                 $handler($request);
                 return;
@@ -65,9 +65,9 @@ class Router
     }
 
 
-    public function middleware($middlewareKey)
-    {
-        return new Middleware();
-    }
+//    public function middleware($middlewareKey)
+//    {
+//        return new Middleware();
+//    }
 
 }

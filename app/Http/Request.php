@@ -46,7 +46,26 @@ class Request
      */
     public function getBody()
     {
-        return $this->body;
+        $requestBody = '';
+        $bodyParam = [];
+        if (in_array($this->getMethod(), ['POST', 'PUT', 'PATCH']) && !empty($this->body)) {
+            if ($this->getHeaders()['Content-Type'] === 'application/x-www-form-urlencoded') {
+                $requestBody = explode('&', $this->body);
+                foreach ($requestBody as $r) {
+                    $param = explode('=', $r);
+                    $bodyParam[$param[0]] = $param[1];
+                }
+            }
+
+            if ($this->getHeaders()['Content-Type'] === 'application/json') {
+                $bodyParam = [];
+            }
+        }
+
+        if ($this->getMethod() === 'GET') {
+
+        }
+        return $bodyParam;
     }
 
     /**
@@ -56,10 +75,10 @@ class Request
     public function all()
     {
         return [
-            $this->getUrl(),
-            $this->getMethod(),
-            $this->getHeaders(),
-            $this->getBody()
+            'url' => $this->getUrl(),
+            'method' => $this->getMethod(),
+            'headers' => $this->getHeaders(),
+            'body' => $this->getBody()
         ];
     }
 
