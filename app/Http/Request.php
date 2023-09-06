@@ -2,7 +2,7 @@
 
 namespace app\Http;
 
-class Request2
+class Request
 {
     private $url;
     private $method;
