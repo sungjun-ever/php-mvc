@@ -4,13 +4,14 @@ use app\Controllers\HomeController;
 use app\Controllers\Router;
 use app\Controllers\UserController;
 use app\Http\Request;
+use app\Middleware\IsAdmin;
 
 $router = new Router();
 
 $router->addRoute('GET', '/', function () {
     $controller = new HomeController();
     $controller->index();
-});
+})->middleware(new IsAdmin());
 
 $router->prefix('/users')->group(function ($router){
     $router->addRoute('GET', '/', function () {
