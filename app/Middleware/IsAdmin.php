@@ -3,18 +3,17 @@
 namespace app\Middleware;
 
 use app\Http\Request;
+use app\Http\Response;
 
 class IsAdmin
 {
-    private $request = '';
-
     /**
      * @param Request $request
+     * @param Response $response
+     * @return Response
      */
-    public function __construct($request)
+    public function process(Request $request, Response $response)
     {
-        $this->request = $request;
+        return $response;
     }
-
-
 }
