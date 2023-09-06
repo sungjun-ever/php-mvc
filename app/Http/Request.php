@@ -8,6 +8,7 @@ class Request
     private $method;
     private $headers;
     private $body;
+    private $urlParam;
 
     public function __construct()
     {
@@ -46,7 +47,6 @@ class Request
      */
     public function getBody()
     {
-        $requestBody = '';
         $bodyParam = [];
         if (in_array($this->getMethod(), ['POST', 'PUT', 'PATCH']) && !empty($this->body)) {
             if ($this->getHeaders()['Content-Type'] === 'application/x-www-form-urlencoded') {
@@ -63,9 +63,25 @@ class Request
         }
 
         if ($this->getMethod() === 'GET') {
-
+            $bodyParam = $this->getUrlParam();
         }
         return $bodyParam;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUrlParam()
+    {
+        return $this->urlParam;
+    }
+
+    /**
+     * @param mixed $urlParam
+     */
+    public function setUrlParam($urlParam)
+    {
+        $this->urlParam = $urlParam;
     }
 
     /**
@@ -81,6 +97,7 @@ class Request
             'body' => $this->getBody()
         ];
     }
+
 
 
 }
