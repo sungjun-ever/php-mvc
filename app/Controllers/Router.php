@@ -43,6 +43,8 @@ class Router
             $pattern = str_replace('/', '\/', $pattern);
             $pattern = '/^' . $pattern . '$/';
 
+            $url = explode('?', $url)[0];
+
             if (preg_match($pattern, $url, $matches)) {
                 foreach ($matches as $key => $value) {
                     if ($key !== 0) {
