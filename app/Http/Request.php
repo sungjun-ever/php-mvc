@@ -81,6 +81,13 @@ class Request
      */
     public function setUrlParam($urlParam)
     {
+        $queryParam = [];
+        if (count(explode('?', $this->getUrl())) > 1) {
+            $query = parse_url($this->getUrl(), PHP_URL_QUERY);
+            parse_str($query, $queryParam);
+        }
+
+        $urlParam = $urlParam + $queryParam;
         $this->urlParam = $urlParam;
     }
 
