@@ -37,5 +37,3 @@ $router->prefix('/users')->group(function ($router){
 
 
 $router->route($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
-
-
