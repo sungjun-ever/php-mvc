@@ -2,17 +2,17 @@
 
 namespace app\Middleware;
 
-use app\Http\Request;
+use app\Http\PrevRequestVer;
 use app\Http\Response;
 
 class IsAdmin
 {
     /**
-     * @param Request $request
+     * @param PrevRequestVer $request
      * @param Response $response
      * @return Response
      */
-    public function process(Request $request, Response $response)
+    public function process(PrevRequestVer $request, Response $response)
     {
         return $response;
     }
