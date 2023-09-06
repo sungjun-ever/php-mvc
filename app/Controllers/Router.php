@@ -67,7 +67,7 @@ class Router
 
     public function middleware($middlewareKey)
     {
-        return new Middleware($this, $middlewareKey);
+        return new Middleware();
     }
 
 }
